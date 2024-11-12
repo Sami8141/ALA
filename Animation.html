@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Magical Sparkles Animation</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden; /* Hide scrollbars */
+      background-color: #222; /* Dark background for better visibility of sparkles */
+    }
+    .sparkle {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background-color: #ffcc00; /* Gold color for sparkles */
+      border-radius: 50%;
+      opacity: 0;
+      animation: sparkle-animation 1.5s forwards;
+    }
+    
+    @keyframes sparkle-animation {
+      0% {
+        transform: scale(0.5);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.5);
+        opacity: 0.7;
+      }
+      100% {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    // Create magic sparkle effect
+    function createSparkle(x, y) {
+      // Create a new sparkle element
+      const sparkle = document.createElement('div');
+      sparkle.classList.add('sparkle');
+      
+      // Set a random size and speed for the sparkle
+      sparkle.style.left = `${x}px`;
+      sparkle.style.top = `${y}px`;
+      
+      // Add it to the body
+      document.body.appendChild(sparkle);
+      
+      // Remove the sparkle after animation is done
+      setTimeout(() => {
+        sparkle.remove();
+      }, 1500); // Duration matches the animation time
+    }
+
+    // Listen for mouse click to create sparkles
+    document.body.addEventListener('mousemove', (event) => {
+      createSparkle(event.pageX, event.pageY);
+    });
+
+    // Optional: Automatically create sparkles at random positions
+    setInterval(() => {
+      const x = Math.random() * window.innerWidth;
+      const y = Math.random() * window.innerHeight;
+      createSparkle(x, y);
+    }, 100); // Sparkles appear every 100ms
+  </script>
+</body>
+</html>
